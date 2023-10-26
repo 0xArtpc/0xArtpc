@@ -7,6 +7,5 @@
 </div>
 
 <div align="center">
-  <img  src="https://github.com/0xArtpc/0xArtpc/blob/output/github-contribution-grid-snake.svg"
        alt="snake" /></a>
 </div>
