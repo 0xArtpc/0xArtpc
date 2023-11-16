@@ -1,6 +1,6 @@
 # Mustacchio
 
-##### Description
+#### Description
 XXE Vulnerability that allow us to get the id_rsa key and login to the server, inside the server there was a SUID file running, by manipulating the PATH var it gave us ROOT
 
 # Recon
