@@ -1,4 +1,4 @@
-[![MasterHead](https://github.com/0xArtpc/0xArtpc/blob/output/github-contribution-grid-snake-dark.svg)]
+![MasterHead](https://github.com/0xArtpc/0xArtpc/blob/output/github-contribution-grid-snake-dark.svg)
 <h1 align="center">Yo, im 0xArtpc</h1>
 <h3 align="center">A passionate CyberSecurity student</h3>
 <img align="right" alt="Coding" width="120" src="https://media.tenor.com/q4L3wKD-P7YAAAAj/hydra-we-bhack.gif">
