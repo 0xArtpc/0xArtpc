@@ -1,5 +1,5 @@
 ![MasterHead](https://github.com/0xArtpc/0xArtpc/blob/output/github-contribution-grid-snake-dark.svg)
-<h1 align="center">Yo, im 0xArtpc</h1>
+<h2 align="center">Yo, im 0xArtpc</h1>
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 <h3 align="center">A passionate CyberSecurity student</h3>
 <img align="right" alt="Coding" width="120" src="https://media.tenor.com/q4L3wKD-P7YAAAAj/hydra-we-bhack.gif">
