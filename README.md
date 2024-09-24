@@ -5,7 +5,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=0xartpc&label=Profile%20views&color=0e75b6&style=flat" alt="0xartpc" /> </p>
 
-- 🌱 I’m currently learning **Pentesting**
+- 🐱‍💻 I’m currently learning **Pentesting**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
