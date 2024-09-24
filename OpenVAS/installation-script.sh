@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 
 # Check if the current user is root
 if [ "$(echo $USER)" == "root" ]; then
@@ -190,8 +189,13 @@ else
 	sudo -u postgres bash -c 'cd; /usr/lib/postgresql/15/bin/createuser -DRS gvm; /usr/lib/postgresql/15/bin/createdb -O gvm gvmd; psql gvmd -c "create role dba with superuser noinherit; grant dba to gvm;"'
 	sudo usermod -aG gvm $USER
 	#newgrp gvm
-	sg gvm -c "/usr/local/sbin/gvmd --create-user=admin --password='admin'"
-	sg gvm -c "/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value `/usr/local/sbin/gvmd --get-users --verbose | grep admin | awk '{print $2}'`"
+	sg gvm -c "
+    	# Step 4: Create the admin user in gvmd
+    	/usr/local/sbin/gvmd --create-user=admin --password='admin';
+
+    	# Step 5: Modify the setting with the new admin user value
+    	/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value \$(/usr/local/sbin/gvmd --get-users --verbose | grep admin | awk '{print \$2}');
+"
 	cat << EOF > $BUILD_DIR/ospd-openvas.service
 [Unit]
 Description=OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)
