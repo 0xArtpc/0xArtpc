@@ -1,7 +1,7 @@
 [![MasterHead](https://github.com/0xArtpc/0xArtpc/blob/output/github-contribution-grid-snake-dark.svg)]
 <h1 align="center">Yo, im 0xArtpc</h1>
 <h3 align="center">A passionate CyberSecurity student</h3>
-<img align="right" alt="Coding" width="200" src="https://media.tenor.com/q4L3wKD-P7YAAAAj/hydra-we-bhack.gif">
+<img align="right" alt="Coding" width="120" src="https://media.tenor.com/q4L3wKD-P7YAAAAj/hydra-we-bhack.gif">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=0xartpc&label=Profile%20views&color=0e75b6&style=flat" alt="0xartpc" /> </p>
 
