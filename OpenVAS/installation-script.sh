@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Release date 24/09/2024
+#
+# Usage: 
+# chmod +x openvas-script.sh
+# ./openvas-script.sh
+#
+
 
 # Check if the current user is root
 if [ "$(echo $USER)" == "root" ]; then
@@ -189,13 +196,9 @@ else
 	sudo -u postgres bash -c 'cd; /usr/lib/postgresql/15/bin/createuser -DRS gvm; /usr/lib/postgresql/15/bin/createdb -O gvm gvmd; psql gvmd -c "create role dba with superuser noinherit; grant dba to gvm;"'
 	sudo usermod -aG gvm $USER
 	#newgrp gvm
-	sg gvm -c "
-    	# Step 4: Create the admin user in gvmd
-    	/usr/local/sbin/gvmd --create-user=admin --password='admin';
+	CREATE_USER_OUTPUT=$(sg gvm -c "/usr/local/sbin/gvmd --create-user=admin;")
+	sg gvm -c "/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value \$(/usr/local/sbin/gvmd --get-users --verbose | grep admin | awk '{print \$2}');"
 
-    	# Step 5: Modify the setting with the new admin user value
-    	/usr/local/sbin/gvmd --modify-setting 78eceaec-3385-11ea-b237-28d24461215b --value \$(/usr/local/sbin/gvmd --get-users --verbose | grep admin | awk '{print \$2}');
-"
 	cat << EOF > $BUILD_DIR/ospd-openvas.service
 [Unit]
 Description=OSPd Wrapper for the OpenVAS Scanner (ospd-openvas)
@@ -301,7 +304,8 @@ EOF
 	sudo systemctl enable openvasd
 	
 	if curl -s http://127.0.0.1:9392/ | grep -q "Greenbone"; then
-    		echo -e "\n\e[32m Success: Greenbone found\e[0m"
+    		echo -e "\n\e[32m Success: Greenbone found open the http://localhost:9392/ \e[0m"
+    		echo "$CREATE_USER_OUTPUT";
     		exit 1
 	else
 		echo -e "\n\e[31mFailure: Greenbone not found\!\e[0m"
