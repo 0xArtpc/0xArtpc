@@ -5,6 +5,4 @@
 <p>To run use a user that isn't root, change the permissions to be executable using
 'chmod +x installation-script.sh'
 Execute the script using 
-'
-./installation-script.sh
-'
+'./installation-script.sh'
