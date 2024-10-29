@@ -8,7 +8,7 @@
 
 `nmap -sCV 10.10.11.16`
 
-![Untitled](Untitled.png)
+![Untitled](images\Untitled.png)
 
 ## SMB
 
