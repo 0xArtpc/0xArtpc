@@ -6,7 +6,7 @@
 
 `nmap -p- -T4 -sCV 192.168.163.144`
 
-![image.png](image.png)
+![image.png](images/image.png)
 
 ## Web ( 80 )
 
