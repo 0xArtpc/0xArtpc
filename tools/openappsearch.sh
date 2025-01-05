@@ -7,7 +7,7 @@
 # Function to display usage information
 usage() {
     echo "Usage: $0 [-f] <target-website> <opensource-repo-url>"
-    echo "Example: $0 http://example.com https://github.com/lirantal/daloradius"
+    echo "Example: $0 http://localhost https://github.com/digininja/DVWA"
     echo "Use -f to disable verbose output and filter sensitive files"
     exit 1
 }
