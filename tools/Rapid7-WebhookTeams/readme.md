@@ -1,3 +1,5 @@
 ## Use Rapid7 with Webhook for Teams
 
-Notes: Make a schedule job to check for new scans and make the cookie system automated
+To-do:
+-Make a schedule job to check for new scans
+-Make the cookie system automated
