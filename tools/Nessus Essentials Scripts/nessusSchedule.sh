@@ -123,7 +123,7 @@ fi
 
 # Step 3: Create the Scan
 echo "Creating scan..."
-RESPONSE=$(curl -s -x "http://127.0.0.1:8080" -k -X POST "$NESSUS_URL/scans" \
+RESPONSE=$(curl -s -k -X POST "$NESSUS_URL/scans" \
     -H "Content-Type: application/json" \
     -H "X-Api-Token: $X_API_TOKEN" \
     -H "X-Cookie: token=$SESSION_TOKEN" \
@@ -158,7 +158,7 @@ curl -k -X POST "$NESSUS_URL/scans/$SCAN_ID/launch" \
 # Step 6: Wait for Scan Completion
 echo "Waiting for the scan to complete..."
 while :; do
-    STATUS=$(curl -k -x "http://127.0.0.1:8080" -X GET "$NESSUS_URL/scans/$SCAN_ID" \
+    STATUS=$(curl -k -X GET "$NESSUS_URL/scans/$SCAN_ID" \
         -H "X-Cookie: token=$SESSION_TOKEN" \
         -H "X-Api-Token: $X_API_TOKEN" \
         -H "X-ApiKeys: accessKey=$ACCESS_KEY; secretKey=$SECRET_KEY" \
@@ -175,7 +175,7 @@ done
 
 
 # Gather Template ID 
-TEMPLATE_ID=$(curl -x "http://127.0.0.1:8080" -k -X GET "$NESSUS_URL/reports/custom/templates" \
+TEMPLATE_ID=$(curl -k -X GET "$NESSUS_URL/reports/custom/templates" \
     -H "X-Cookie: token=$SESSION_TOKEN" \
     -H "X-ApiKeys: accessKey=$ACCESS_KEY; secretKey=$SECRET_KEY" \
     -H "X-Api-Token: $X_API_TOKEN" -s | \
@@ -185,7 +185,7 @@ TEMPLATE_ID=$(curl -x "http://127.0.0.1:8080" -k -X GET "$NESSUS_URL/reports/cus
 
 # Step 7: Retrieve Export Token
 echo "Retrieving export token..."
-EXPORT_TOKEN=$(curl -k -x "http://127.0.0.1:8080" -X POST "$NESSUS_URL/scans/$SCAN_ID/export" \
+EXPORT_TOKEN=$(curl -k -X POST "$NESSUS_URL/scans/$SCAN_ID/export" \
     -H "X-Cookie: token=$SESSION_TOKEN" \
     -H "Content-Type: application/json" \
     -H "X-Api-Token: $X_API_TOKEN" \
@@ -199,12 +199,12 @@ if [[ -z $EXPORT_TOKEN || ! "$EXPORT_TOKEN" =~ ^[0-9]+$ ]]; then
 fi
 
 sleep 30
-echo -e "\n\n"
+
 # Step 8: Export the Report
 CURRENT_DATE=$(date +"%m%d%y")
-FULL_REPORT_FILE="ScanReport_${CURRENT_DATE}.pdf"
+FULL_REPORT_FILE="${SCAN_Name}_${CURRENT_DATE}.pdf"
 echo "Exporting the report..."
-curl -v -x "http://127.0.0.1:8080" -k -X GET "$NESSUS_URL/scans/$SCAN_ID/export/$EXPORT_TOKEN/download" -s \
+curl -k -X GET "$NESSUS_URL/scans/$SCAN_ID/export/$EXPORT_TOKEN/download" -s \
     -H "X-Cookie: token=$SESSION_TOKEN" \
     -H "X-Api-Token: $X_API_TOKEN" \
     -H "X-ApiKeys: accessKey=$ACCESS_KEY; secretKey=$SECRET_KEY" \
