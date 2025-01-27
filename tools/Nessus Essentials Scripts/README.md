@@ -1,16 +1,32 @@
-![image](https://github.com/user-attachments/assets/80c07192-187d-4199-a225-8febf8c2e007)
+# Scripts for Nessus Essentials
 
-# WayBackup Finder
+## Create Schedule Scan for Nessus Essentials
 
-This Python script fetches URLs from the Wayback Machine and filters them based on specified file extensions. It also checks if archived snapshots are available for each URL and saves the filtered URLs to files.
+**Usage:**  
+`create_schedule_scan.sh -s scan_number -t target-ip -h host-of-nessus -u username-of-nessus -p password-of-nessus`  
 
-Read more: <a href="https://anmolksachan.medium.com/unlock-hidden-backups-with-waybackupfinder-py-7b98041a82d9" target="_blank">Medium</a><br>
-Watch Tool in action: <a href="https://anmolksachan.medium.com/discovering-backups-secrets-and-more-using-the-waybackupfinder-py-tool-b97f67e95c50">Medium</a>
+**Example:**  
+`create_schedule_scan.sh -s 2 -t 127.0.0.1 -h https://kali:8834 -u admin -p admin`  
 
-## Features
+### List of Available Scans and Their Respective Numbers
 
-- Fetches URLs from the Wayback Machine using the CDX API.
-- Filters the fetched URLs by specific file extensions (e.g., `.pdf`, `.zip`).
-- Checks if a Wayback snapshot is available for each URL.
-- Saves the filtered URLs to text files.
-- Customizable file extensions to filter or use default extensions from `extensions.txt`.
+Available scan types:  
+1. **asv**  
+2. **discovery**  
+3. **basic**  
+4. **patch_audit**  
+5. **webapp**  
+6. **malware**  
+7. **mobile**  
+8. **mdm**  
+9. **compliance**  
+10. **pci**  
+11. **offline**  
+12. **cloud_audit**  
+13. **scap**  
+14. **advanced**  
+15. **advanced_dynamic**  
+16. **active_directory**  
+17. **ai_llm_assessment**  
+18. **nessus_agent_reset_and_update**  
+19. **credential_validation**  
