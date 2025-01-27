@@ -2,8 +2,8 @@
 
 <h2>Create Schedule Scan for nessus Essentials</h2>
 <p>Usage: <br>
-```create_schedule_scan.sh -s scan_number -t target-ip -h host-of-nessus -u username-of-nessus -p password-of-nessus```<br>
-```Example create_schedule_scan.sh -s 2 -t 127.0.0.1 -h https://kali:8834 -u admin -p admin```
+`create_schedule_scan.sh -s scan_number -t target-ip -h host-of-nessus -u username-of-nessus -p password-of-nessus`
+`Example create_schedule_scan.sh -s 2 -t 127.0.0.1 -h https://kali:8834 -u admin -p admin`
 <br>
 <p>List of available scans and the respective numbers
 Available scan types:
