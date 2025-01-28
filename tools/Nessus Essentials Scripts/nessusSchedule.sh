@@ -202,7 +202,7 @@ sleep 30
 
 # Step 8: Export the Report
 CURRENT_DATE=$(date +"%m%d%y")
-FULL_REPORT_FILE="${SCAN_Name}_${CURRENT_DATE}.pdf"
+FULL_REPORT_FILE="${SCAN_NAME}_${CURRENT_DATE}.pdf"
 echo "Exporting the report..."
 curl -k -X GET "$NESSUS_URL/scans/$SCAN_ID/export/$EXPORT_TOKEN/download" -s \
     -H "X-Cookie: token=$SESSION_TOKEN" \
