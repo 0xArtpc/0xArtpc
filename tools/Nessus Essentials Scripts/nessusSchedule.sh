@@ -24,6 +24,14 @@ function show_help() {
     echo "  -u  Nessus username (required)"
     echo "  -p  Nessus password (required)"
     echo "  -n  Custom scan name (optional)"
+    echo -e "\n Available scan templates:\n
+  2. discovery [bbd4f805-3966-d464-b2d1-0079eb89d69708c3a05ec2812bcf]
+  3. basic [731a8e52-3ea6-a291-ec0a-d2ff0619c19d7bd788d6be818b65]
+  5. webapp [c3cbcd46-329f-a9ed-1077-554f8c2af33d0d44f09d736969bf]
+  6. malware [d16c51fa-597f-67a8-9add-74d5ab066b49a918400c42a035f7]
+  14. advanced [ad629e16-03b6-8c1d-cef6-ef8c9dd3c658d24bd260ef5f9e66]
+  15. advanced_dynamic [939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101]
+  17. ai_llm_assessment [a303f033-d3b7-e53c-603d-a7bbf7b3c65ec6d8ecaa53911a55]"
     exit 0
 }
 
@@ -43,6 +51,12 @@ while getopts "s:t:h:u:p:n:?" opt; do
             ;;
     esac
 done
+
+if ! [[ "$SCAN_NUMBER" =~ ^(2|3|5|6|14|15|17)$ ]]; then
+    show_help
+    exit 1
+fi
+
 
 # Validate required inputs
 if [[ -z "$SCAN_NUMBER" || -z "$TARGET_IP" || -z "$NESSUS_URL" || -z "$USERNAME" || -z "$PASSWORD" ]]; then
@@ -80,7 +94,8 @@ if [[ -z "$TEMPLATES" ]]; then
 fi
 
 echo "Available scan templates:"
-echo "$TEMPLATES" | jq -r 'to_entries[] | "\(.key + 1). \(.value.name) [\(.value.uuid)]"'
+echo "$TEMPLATES" | jq -r 'to_entries[] | "\(.key + 1). \(.value.name) [\(.value.uuid)]"' | grep -E 'discovery|basic|webapp|malware|advanced|advanced_dynamic|ai_llm_assessment'
+
 
 # Retrieve Selected Scan Type
 SELECTED_TEMPLATE=$(echo "$TEMPLATES" | jq -c ".[$SCAN_NUMBER - 1]")
@@ -137,7 +152,9 @@ RESPONSE=$(curl -s -k -X POST "$NESSUS_URL/scans" \
             "scanner_id": 1,
             "launch_now": false
         }
-    }')
+    }' )
+
+
 
 SCAN_ID=$(echo "$RESPONSE" | jq -r '.scan.id')
 
@@ -156,7 +173,7 @@ curl -k -X POST "$NESSUS_URL/scans/$SCAN_ID/launch" \
 
 
 # Step 6: Wait for Scan Completion
-echo "Waiting for the scan to complete..."
+echo -e "\nWaiting for the scan to complete..."
 while :; do
     STATUS=$(curl -k -X GET "$NESSUS_URL/scans/$SCAN_ID" \
         -H "X-Cookie: token=$SESSION_TOKEN" \
